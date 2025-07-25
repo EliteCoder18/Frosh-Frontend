@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Wave Animation Styles */
+.wave-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(30, 58, 138, 0.1) 20%, 
+    rgba(59, 130, 246, 0.2) 40%, 
+    rgba(30, 58, 138, 0.1) 60%, 
+    transparent 80%);
+  animation: wave-flow 20s linear infinite;
+  opacity: 0.7;
+}
+
+.wave-1 {
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(30, 58, 138, 0.15) 25%, 
+    rgba(59, 130, 246, 0.25) 50%, 
+    rgba(30, 58, 138, 0.15) 75%, 
+    transparent 100%);
+  animation-duration: 25s;
+  animation-delay: 0s;
+}
+
+.wave-2 {
+  background: linear-gradient(-45deg, 
+    transparent 0%, 
+    rgba(15, 23, 42, 0.2) 30%, 
+    rgba(30, 58, 138, 0.3) 60%, 
+    rgba(15, 23, 42, 0.2) 90%, 
+    transparent 100%);
+  animation-duration: 30s;
+  animation-delay: -5s;
+}
+
+.wave-3 {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.1) 20%, 
+    rgba(30, 58, 138, 0.2) 50%, 
+    rgba(59, 130, 246, 0.1) 80%, 
+    transparent 100%);
+  animation-duration: 35s;
+  animation-delay: -10s;
+}
+
+.wave-4 {
+  background: linear-gradient(-90deg, 
+    transparent 0%, 
+    rgba(15, 23, 42, 0.25) 25%, 
+    rgba(30, 58, 138, 0.15) 50%, 
+    rgba(15, 23, 42, 0.25) 75%, 
+    transparent 100%);
+  animation-duration: 40s;
+  animation-delay: -15s;
+}
+
+@keyframes wave-flow {
+  0% {
+    transform: translateX(-100%) translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-75%) translateY(-20px) rotate(1deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(0px) rotate(0deg);
+  }
+  75% {
+    transform: translateX(-25%) translateY(-15px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(0%) translateY(0px) rotate(0deg);
+  }
+}
+
+/* Dithering Effect */
+.wave::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at 40% 60%, rgba(15, 23, 42, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px, 30px 30px, 25px 25px;
+  animation: dither 15s linear infinite;
+}
+
+@keyframes dither {
+  0% {
+    background-position: 0px 0px, 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 20px 20px, -30px -30px, 25px -25px;
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.8);
+}
+
+/* Enhanced Transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Focus States */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Backdrop Blur Support */
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* Animation Performance */
+.wave {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+  .wave {
+    width: 300%;
+  }
+  
+  .wave-container {
+    height: 120%;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .wave {
+    animation: none;
+  }
+  
+  .wave::before {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+  }
+}
